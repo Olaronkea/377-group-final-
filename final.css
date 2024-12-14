@@ -1,8 +1,12 @@
 body {
     font-family: Arial, sans-serif;
     margin: 10px;
-    padding: 0;
-    text-align: center;
+    padding: 5px;
+    background-color: rgb(175, 209, 223);
+}
+
+ul {
+    margin: 5px;
 }
 
 nav ul {
