@@ -29,7 +29,7 @@ fetch(`https://zipcodeapi.com/rest/${ZIPCODE_API_KEY}/distance.json/${zip1}/${zi
   .catch(error => console.error("Error fetching ZipCode data:", error));
 
 // Placeholder for your third API
-fetch('/api/future-endpoint') 
+fetch('/api/future-endpoint')
   .then(response => {
     if (!response.ok) throw new Error(`Future API error: ${response.status}`);
     return response.json();
