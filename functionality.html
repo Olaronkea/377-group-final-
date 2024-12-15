@@ -1,12 +1,12 @@
-
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Functionality</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+    <script type="module" src="script.js"></script>
 </head>
 <body>
     <nav>
@@ -18,11 +18,34 @@
     </nav>
 
     <div id="functionality">
-        <h1>Core Functionality</h1>
-        <p>Search for a GitHub user's profile below:</p>
-        <input type="text" id="username" placeholder="Enter GitHub username">
-        <button id="search">Search</button>
-        <div id="results"></div>
+        <h1>Login / Sign Up</h1>
+        <div id="forms">
+            <h2>Sign Up</h2>
+            <form id="signup-form">
+                <label for="signup-email">Email:</label>
+                <input type="email" id="signup-email" required><br>
+
+                <label for="signup-username">Username:</label>
+                <input type="text" id="signup-username" required><br>
+
+                <label for="signup-password">Password:</label>
+                <input type="password" id="signup-password" required><br>
+
+                <button type="button" id="signup-button">Sign Up</button>
+            </form>
+
+            <h2>Login</h2>
+            <form id="login-form">
+                <label for="login-username">Username:</label>
+                <input type="text" id="login-username" required><br>
+
+                <label for="login-password">Password:</label>
+                <input type="password" id="login-password" required><br>
+
+                <button type="button" id="login-button">Login</button>
+            </form>
+        </div>
+        <div id="response"></div>
     </div>
 </body>
 </html>
