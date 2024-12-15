@@ -5,8 +5,22 @@ body {
     background-color: rgb(175, 209, 223);
 }
 
+p {
+    width: 50%;
+}
+
 ul {
     margin: 5px;
+}
+
+ol {
+    float: left;
+    width: 50%;
+}
+
+#aq_index {
+    width: 600px;
+    float: right;
 }
 
 nav ul {
