@@ -17,7 +17,7 @@ signupButton.addEventListener("click", async () => {
     const password = document.getElementById("signup-password").value;
 
     if (email && username && password) {
-        const { data, error } = await supabase.from('users').insert([
+        const { data, error } = await supabaseClient.from('users').insert([
             { email: email, username: username, password: password }
         ]);
 
@@ -36,7 +36,7 @@ loginButton.addEventListener("click", async () => {
     const password = document.getElementById("login-password").value;
 
     if (username && password) {
-        const { data, error } = await supabase
+        const { data, error } = await supabaseClient
             .from('users')
             .select("*")
             .eq("username", username)
