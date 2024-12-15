@@ -16,6 +16,7 @@ ul {
 ol {
     float: left;
     width: 50%;
+    margin: 10px;
 }
 
 #aq_index {
