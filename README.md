@@ -9,52 +9,142 @@ This project will be most compatible with Windows browsers, however, other deskt
 Developer Manual:
 
 This manual provides instructions for setting up the air quality and weather data web application
+Project setup 
 
-
-Project setup 
 Prerequisites
-	•	Node.js(v14 or later) and npm installed
-	•	Access to API keys for IQAir and ZipcodeAPI
 
-Step 1 Clone the Repository 
+Node.js(v14 or later) and npm installed
+Access to API keys for IQAir and ZipcodeAPI
+Modern web browser 
+
+Step 1 Clone the Repository 
 Clone repository to your local machine using this command
- 
-git clone https://github.com/Olaronke/377-group-final-
-cd your-project-directory
+ 
+git clone https://github.com/Olaronke/377-group-final-  (repository url)
+cd <repository-name>
 
-Step 2 Install dependencies 
-Navigate to the project directory and install required dependencies 
+Step 2 Install dependencies 
+Navigate to the project directory and install required dependencies 
 
 npm install
 
-This command will install the following libraries 
+Set up environment variables:
 
-React(for handling dynamic updates)
-Leaflet.js or mapbox(for mapping)
-Chart.js(for creating data visualizations)
-Axios(for handling API requests)
-Express(for server-side handling)
+Create a .env file in the root directory.
 
-Step 3 Set up API keys 
-To fetch air quality and weather data, you'll need api keys for iqair and zipcodeapi
-	1	Register for IQair and ZipcodeAPI accounts to obtain your API keys
-	2	Create a .env file in the root of the project and add your keys:
+Add the following variables:
 
-IQAIR_API_KEY=your-iqair-api-key
-ZIPCODE_API_KEY=your-zipcode-api-key
+AIRVISUAL_API_KEY=your_airvisual_api_key
+ZIPCODE_API_KEY=your_zipcode_api_key
 
-Step 4 Running the Application Locally 
+Ensure the required APIs are accessible.
 
-Npm start 
+Step 4 Running the Application Locally 
+
+npm start 
 
 This will start the development server and open the app in your browser at http://localhost:3000
 
-Step 5 Running Tests 
-To run any tests you have written for the application 
+Step 5 Running Tests 
+To run any tests you have written for the application 
 
-Npm test
+Build the application:
 
-This command will execute the tests using the configured testing framework 
+npm run build
+
+Deploy the build directory to your production server or hosting platform.
+
+npm test
+
+This command will execute the tests using the configured testing framework 
 
 
+API Endpoints
 
+Overview
+
+This application uses several APIs to fetch air quality and geographic data. Below are the available endpoints:
+
+GET /air-quality
+
+Description: Fetches air quality data for a specific city.
+
+Query Parameters:
+
+city: The city name (required).
+
+state: The state name (required).
+
+country: The country name (optional).
+
+Response:
+
+{
+  "status": "success",
+  "data": {
+    "city": "Los Angeles",
+    "state": "California",
+    "aqi": 42
+  }
+}
+
+GET /distance
+
+Description: Fetches the distance between two zip codes.
+
+Query Parameters:
+
+zip1: First zip code (required).
+
+zip2: Second zip code (required).
+
+Response:
+
+{
+  "status": "success",
+  "distance": 2794.8
+}
+
+GET /location
+
+Description: Fetches geographic details based on latitude and longitude.
+
+Query Parameters:
+
+latitude: Latitude coordinate (required).
+
+longitude: Longitude coordinate (required).
+
+Response:
+
+{
+  "city": "New York",
+  "state": "New York"
+}
+
+Known Bugs and Future Development
+
+Known bugs 
+Api failures
+Occurs when external api rates exceed
+Workaround: add api keys with higher quotas or implement caching 
+
+Geolocation errors 
+Some browsers may block geolocation requests 
+Workaround: Provide manual input fields for city or zipcode 
+
+Future developments 
+
+Feature enhancements 
+Add user accounts for personalized air quality alerts 
+Allow users to save multiple locations 
+
+Performance Improvements 
+Implement weather forecasts for better planning  
+
+Additional Apis
+Integrate weather forecasts for better planning 
+
+Ui/Ux Improvements 
+Add animations to improve interactivity 
+Develop a mobile responsive design 
