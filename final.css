@@ -6,12 +6,16 @@ body {
     color: #333;
   }
 
+  .flex{
+    display: flex;
+  }
+
   #purposeOne, #purposeTwo {
     width: 70%;
   }
 
   #aq_index {
-    width: 600px;
+    width: 700px;
     float: right;
   }
 
