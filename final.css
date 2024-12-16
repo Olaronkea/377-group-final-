@@ -1,9 +1,23 @@
 body {
     font-family: Arial, sans-serif;
-    margin: 10px;
+    margin: 20px;
     padding: 0;
     background-color: #f4f4f9;
     color: #333;
+  }
+
+  #purposeOne, #purposeTwo {
+    width: 70%;
+  }
+
+  #aq_index {
+    width: 600px;
+    float: right;
+  }
+
+  ol {
+    float: left;
+    width: 60%;
   }
 
   /* Header styles */
