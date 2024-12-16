@@ -1,8 +1,7 @@
 
 body {
     font-family: Arial, sans-serif;
-    margin: 20px;
-    padding: 0;
+    padding: 10px;
     background-color: #f4f4f9;
     color: #333;
   }
@@ -135,6 +134,8 @@ body {
     max-width: 700px;
     position: relative;
     margin: auto;
+    margin-top: 10px;
+    
   }
   
 
