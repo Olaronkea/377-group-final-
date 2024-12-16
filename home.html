@@ -1,10 +1,11 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Three Page Web App</title>
+    <title>Functionality</title>
     <link rel="stylesheet" href="final.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script src="script.js" defer></script>
 </head>
 <body>
     <nav>
@@ -15,11 +16,45 @@
         </ul>
     </nav>
 
-    <!-- Home Page Content -->
-    <div id="home">
-        <h1>Welcome to the Three Page Web App</h1>
-        <p>This is the home page of our simple web application. Navigate using the menu above.</p>
-    </div>
+    <div id="functionality">
+        <h1>Login / Sign Up</h1>
+        <div id="forms">
+            <h2>Sign Up</h2>
+            <form id="signup-form">
+                <label for="signup-email">Email:</label>
+                <input type="email" id="signup-email" required><br>
 
+                <label for="signup-username">Username:</label>
+                <input type="text" id="signup-username" required><br>
+
+                <label for="signup-password">Password:</label>
+                <input type="password" id="signup-password" required><br>
+
+                <label for="signup-zipcode">Zipcode:</label>
+                <input type="text" id="signup-zipcode" required><br>
+
+                <button type="button" id="signup-button">Sign Up</button>
+            </form>
+
+            <h2>Login</h2>
+            <form id="login-form">
+                <label for="login-username">Username:</label>
+                <input type="text" id="login-username" required><br>
+
+                <label for="login-password">Password:</label>
+                <input type="password" id="login-password" required><br>
+
+                <button type="button" id="login-button">Login</button>
+            </form>
+        </div>
+
+        <div id="user-info" style="display: none;">
+            <h2>Welcome, <span id="username-display"></span></h2>
+            <p>Current Zipcode: <span id="zipcode-display"></span></p>
+            <label for="update-zipcode">New Zipcode:</label>
+            <input type="text" id="update-zipcode">
+            <button type="button" id="update-zipcode-button">Update Zipcode</button>
+        </div>
+    </div>
 </body>
 </html>
