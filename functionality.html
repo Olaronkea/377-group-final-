@@ -1,26 +1,30 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Main Page - Air Quality & Weather</title>
-  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css">
+
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="final.css">
+  
+</head>
+<body>
   <header>
     <div class="logo">Weather & AQI</div>
-  <link rel="stylesheet" href="final.css">
+    <nav>
       <a href="home.html">Home</a>
       <a href="about.html">About</a>
       <a href="functionality.html">Functionality</a>
-    <nav>
+    </nav>
     <div class="search-bar">
       <input type="text" id="zip-input" placeholder="Enter ZIP code">
       <button id="submit-btn">Check Weather & Air Quality</button>
     </div>
   </header>
-    <div class="current-data">
+
   <main class="main-section">
     <div class="current-data">
       <!-- Weather Section -->
@@ -32,16 +36,16 @@
         <p>Forecast: <span id="forecast">--</span></p>
         <p><b>City: </b><span id='city'></span></p>
         <p><b>State: </b><span id="state"></span></p>
+      </div>
 
-    <div class="map">
       <!-- Air Quality Section -->
       <div class="data-section" id="air-quality-section">
         <h3>Air Quality</h3>
         <p>AQI: <span id="aqi">--</span></p>
         <p>Atomospheric Pressure: <span id="pressure">--</span> hPa</p>
         <p>Main Pollutant: <span id="pollutant">--</span></p>
-    <p>Powered by <a href="https://airvisual.com">AirVisual API</a> and <a href="https://zipcodeapi.com">ZipCode API</a></p>
-    <p><a href="#">About</a> | <a href="#">Help</a></p>
+      </div>
+    </div>
 
     <div class="map">
       <h3>Interactive Map</h3>
@@ -52,9 +56,6 @@
   <footer>
     <p>Powered by <a href="https://airvisual.com">AirVisual API</a> and <a href="https://zipcodeapi.com">ZipCode API</a></p>
     <p><a href="#">About</a> | <a href="#">Help</a></p>
-  </footer>
-
-  <script src="climate.js"></script>
   </footer>
 
   <script src="climate.js"></script>
