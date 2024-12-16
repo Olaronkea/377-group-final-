@@ -13,22 +13,23 @@ document.getElementById('submit-btn').addEventListener('click', async () => {
   // Fetch weather and air quality data for the ZIP code
   try {
     const locationData = await fetchLocationData(zip);
-    const { latitude, longitude, city, state } = locationData;
+    const { latitude, longitude, city, state, country } = locationData;
+    console.log('location data', locationData)
 
     // Fetch and display weather data
     fetchWeatherData(latitude, longitude);
 
     // Fetch and display air quality data
-    fetchAirQualityData(city, state);
+    fetchAirQualityData(city, state, country, AIRVISUAL_API_KEY);
 
     // Update map view
     updateMap(latitude, longitude);
 
     // Display location details
-    document.getElementById('weather-section').innerHTML += `
-      <p><b>City:</b> ${city}</p>
-      <p><b>State:</b> ${state}</p>
-    `;
+    document.getElementById('city').innerText= `${city}`;
+    document.getElementById('state').innerText= `${state}`;
+      
+
   } catch (error) {
     console.error('Error:', error);
     alert('Unable to fetch data. Please try again.');
@@ -38,14 +39,16 @@ document.getElementById('submit-btn').addEventListener('click', async () => {
 // Fetch location data for the ZIP code
 // Fetch location data for the ZIP code
 async function fetchLocationData(zip) {
-    const zipApiUrl = `https://api.zippopotam.us/us/${zip}`;
-    const response = await fetch(zipApiUrl);
-    if (!response.ok) throw new Error(`ZIP API error: ${response.status}`);
-    const data = await response.json();
-    const { latitude, longitude, 'place name': city, state, country } = data.places[0];
-    return { latitude, longitude, city, state, country };
-  }
-  
+  const zipApiUrl = `https://api.zippopotam.us/us/${zip}`;
+  const response = await fetch(zipApiUrl);
+  if (!response.ok) throw new Error(`ZIP API error: ${response.status}`);
+  const data = await response.json();
+  country = data['country abbreviation'];
+  console.log('data', data)
+  const { latitude, longitude, 'place name': city, state } = data.places[0];
+  return { latitude, longitude, city, state, country };
+}
+
 // Fetch and display weather data
 async function fetchWeatherData(latitude, longitude) {
   const weatherApiUrl = `https://api.weather.gov/points/${latitude},${longitude}`;
@@ -59,7 +62,6 @@ async function fetchWeatherData(latitude, longitude) {
     const currentWeather = forecastData.properties.periods[0];
 
     document.getElementById('temp').innerText = currentWeather.temperature;
-    document.getElementById('humidity').innerText = currentWeather.relativeHumidity;
     document.getElementById('wind-speed').innerText = currentWeather.windSpeed;
     document.getElementById('forecast').innerText = currentWeather.shortForecast;
   } catch (error) {
@@ -69,34 +71,42 @@ async function fetchWeatherData(latitude, longitude) {
 
 // Fetch and display air quality data
 // Fetch and display air quality data using the AirVisual API
-async function fetchAirQualityData(city, state, country) {
-    const airQualityApiUrl = `http://api.airvisual.com/v2/station?station={{STATION_NAME}}&city=${encodeURIComponent(
-      city
-    )}&state=${encodeURIComponent(state)}&country=${encodeURIComponent(country)}&key=${AIRVISUAL_API_KEY}`;
-  
-    try {
-      const response = await fetch(airQualityApiUrl);
-      if (!response.ok) throw new Error(`AirVisual API error: ${response.status}`);
-      const data = await response.json();
-  
-      // Ensure data exists before updating
-      if (data && data.data && data.data.current) {
-        const { current_aqi, o3 } = data.data.current.pollution;
-  
-        document.getElementById('aqi').innerText = current_aqi || '--';
-        document.getElementById('pm25').innerText =
-          data.data.current.pollution.pm25 || '--';
-        document.getElementById('ozone').innerText = o3 || '--';
-      } else {
-        console.error('Error: Missing air quality data');
-        alert('Unable to fetch air quality data');
-      }
-    } catch (error) {
-      console.error('Error fetching air quality data:', error);
-    }
+async function fetchAirQualityData(city, state, country, AIRVISUAL_API_KEY) {
+  const airQualityApiUrl = `http://api.airvisual.com/v2/city?city=${encodeURIComponent(city)}&state=${encodeURIComponent(state)}&country=${encodeURIComponent(country) + 'A'}&key=${AIRVISUAL_API_KEY}`;
+
+  try {
+    const response = await fetch(airQualityApiUrl);
+
+    if (!response.ok) throw new Error(`AirVisual API error: ${response.status}`);
+    const data = await response.json();
+    console.log(data)
+    // Ensure data exists before updating
+    // if (data && data.data && data.data.current) {
+    //   const { current_aqi, o3 } = data.data.current.pollution;
+
+    //   document.getElementById('aqi').innerText = current_aqi || '--';
+    //   document.getElementById('pm25').innerText =
+    //     data.data.current.pollution.pm25 || '--';
+    //   document.getElementById('ozone').innerText = o3 || '--';
+    // } else {
+    //   console.error('Error: Missing air quality data');
+    //   alert('Unable to fetch air quality data');
+    // }
+
+    const aqi = data.data.current.pollution.aqius
+    const pressure = data.data.current.weather.pr
+    const humidity = data.data.current.weather.hu
+    const pollutant = data.data.current.pollution.mainus
+    document.getElementById('aqi').innerText = aqi
+    document.getElementById('pressure').innerText = pressure
+    document.getElementById('humidity').innerText = humidity
+    document.getElementById('pollutant').innerText = pollutant
+  } catch (error) {
+    console.error('Error fetching air quality data:', error);
   }
-  
-  
+}
+
+
 
 // Update map
 function updateMap(latitude, longitude) {
