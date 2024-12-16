@@ -51,17 +51,68 @@ loginButton.addEventListener("click", async () => {
         } else if (data.length === 0) {
             alert('Invalid username or password.');
         } else {
-            // Display user info
-            usernameDisplay.textContent = data[0].username;
-            zipcodeDisplay.textContent = data[0].zipcode;
-
-            userInfoSection.style.display = 'block';
+            // Replace page content with the main page HTML
+            document.documentElement.innerHTML = `
+              <!DOCTYPE html>
+              <html lang="en">
+              <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Main Page - Air Quality & Weather</title>
+                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css">
+                <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+                <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+                <link rel="stylesheet" href="final.css">
+              </head>
+              <body>
+                <header>
+                  <div class="logo">Weather & AQI</div>
+                  <nav>
+                    <a href="home.html">Home</a>
+                    <a href="about.html">About</a>
+                    <a href="functionality.html">Functionality</a>
+                  </nav>
+                  <div class="search-bar">
+                    <input type="text" id="zip-input" placeholder="Enter ZIP code">
+                    <button id="submit-btn">Check Weather & Air Quality</button>
+                  </div>
+                </header>
+                <main class="main-section">
+                  <div class="current-data">
+                    <div class="data-section" id="weather-section">
+                      <h3>Weather</h3>
+                      <p>Temperature: <span id="temp">--</span> &#8457;</p>
+                      <p>Humidity: <span id="humidity">--</span>%</p>
+                      <p>Wind Speed: <span id="wind-speed">--</span> mph</p>
+                      <p>Forecast: <span id="forecast">--</span></p>
+                      <p><b>City: </b><span id='city'></span></p>
+                      <p><b>State: </b><span id="state"></span></p>
+                    </div>
+                    <div class="data-section" id="air-quality-section">
+                      <h3>Air Quality</h3>
+                      <p>AQI: <span id="aqi">--</span></p>
+                      <p>Atmospheric Pressure: <span id="pressure">--</span> hPa</p>
+                      <p>Main Pollutant: <span id="pollutant">--</span></p>
+                    </div>
+                  </div>
+                  <div class="map">
+                    <h3>Interactive Map</h3>
+                    <div id="map" style="height: 400px; border-radius: 8px;"></div>
+                  </div>
+                </main>
+                <footer>
+                  <p>Powered by <a href="https://airvisual.com">AirVisual API</a> and <a href="https://zipcodeapi.com">ZipCode API</a></p>
+                  <p><a href="#">About</a> | <a href="#">Help</a></p>
+                </footer>
+                <script src="climate.js"></script>
+              </body>
+              </html>
+            `;
         }
     } else {
         alert('Please fill in all fields.');
     }
 });
-
 // Update Zipcode Functionality
 updateZipcodeButton.addEventListener("click", async () => {
     const newZipcode = updateZipcodeInput.value;
