@@ -149,3 +149,4 @@ document.getElementById('submit-btn').addEventListener('click', async () => {
     alert('Unable to fetch location data. Please try again.');
   }
 });
+
